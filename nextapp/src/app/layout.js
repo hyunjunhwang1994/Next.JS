@@ -1,5 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
+import {Control} from "@/app/control";
 
 export const metadata = {
   title: "강의 사이트", // 웹 제목
@@ -8,7 +9,8 @@ export const metadata = {
 
 export default async function RootLayout({children}) {
 
-  const resp = await fetch("http://localhost:9999/topics",
+
+  const resp = await fetch(process.env.NEXT_PUBLIC_API_URL +"topics",
       {cache:'no-store'}
       )
   const topics = await resp.json()
@@ -25,11 +27,7 @@ export default async function RootLayout({children}) {
         }
       </ol>
       {children}
-      <ul>
-        <li><Link href="/create">Create</Link></li>
-        <li><Link href="/update/1">Update</Link></li>
-        <li><input type="button" value="delete"/></li>
-      </ul>
+      <Control/>
       </body>
       </html>
   );

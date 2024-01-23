@@ -19,7 +19,7 @@ export default function Create(){
           body: JSON.stringify({title, body})
         }
 
-        fetch("http://localhost:9999/topics", options)
+        fetch(process.env.NEXT_PUBLIC_API_URL+"topics", options)
             .then(resp => resp.json())
             .then(result => {
               console.log(result) // POST로 요청하면 json-server는 해당 데이터를 생성하고 생성된 데이터를 리턴해준다.
